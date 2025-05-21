@@ -1,7 +1,10 @@
 # Changelog
 
-## 1.0.0
-*  Repath updated
+## 1.0.3
+*  auto generation improved
+
+## 1.0.1
+*  path updated
 
 
 ## 0.1.0

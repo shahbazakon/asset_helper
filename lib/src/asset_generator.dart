@@ -1,7 +1,9 @@
 import 'dart:io';
+
 import 'package:path/path.dart' as path;
-import 'models/asset_file.dart';
+
 import 'config.dart';
+import 'models/asset_file.dart';
 import 'utils/file_utils.dart';
 
 /// Main class for generating asset references
@@ -39,8 +41,7 @@ class AssetGenerator {
         continue;
       }
 
-      final assets =
-          FileUtils.scanAssetDirectory(dirPath, baseDir: projectRoot);
+      final assets = FileUtils.scanAssetDirectory(dirPath, baseDir: projectRoot);
 
       // Filter assets based on extension if needed
       final filteredAssets = assets.where((asset) {
@@ -107,30 +108,21 @@ class AssetGenerator {
   }
 
   /// Generate flat references in the format: final String IconsHomeSVG = "assets/icons/home.svg";
-  void _generateFlatReferences(
-      StringBuffer buffer, List<AssetFile> assetFiles, int indentLevel) {
+  void _generateFlatReferences(StringBuffer buffer, List<AssetFile> assetFiles, int indentLevel) {
     final indent = ' ' * indentLevel;
 
     // Sort assets alphabetically for better readability
     assetFiles.sort((a, b) => a.relativePath.compareTo(b.relativePath));
 
     for (final asset in assetFiles) {
-      if (config.includeComments) {
-        buffer.writeln('${indent}/// Asset file: ${asset.relativePath}');
-      }
-
       final varName = _sanitizeVariableName(asset.newVariableName);
-      buffer.writeln(
-          '${indent}final String $varName = \'${asset.relativePath}\';');
+      buffer.writeln('${indent}final String $varName = \'${asset.relativePath}\';');
     }
   }
 
   /// Generate nested classes for directory structure
-  void _generateNestedClasses(
-      StringBuffer buffer,
-      Map<String, List<AssetFile>> assetGroups,
-      String currentPath,
-      int indentLevel) {
+  void _generateNestedClasses(StringBuffer buffer, Map<String, List<AssetFile>> assetGroups,
+      String currentPath, int indentLevel) {
     final indent = ' ' * indentLevel;
 
     // Get direct assets in this path
@@ -146,8 +138,7 @@ class AssetGenerator {
           ? _sanitizeVariableName(asset.newVariableName)
           : _sanitizeVariableName(asset.variableName);
 
-      buffer.writeln(
-          '${indent}static const String $varName = \'${asset.relativePath}\';');
+      buffer.writeln('${indent}static const String $varName = \'${asset.relativePath}\';');
     }
 
     if (assets.isNotEmpty) {
@@ -159,8 +150,7 @@ class AssetGenerator {
     for (final dir in assetGroups.keys) {
       if (dir == currentPath || !dir.startsWith(currentPath)) continue;
 
-      final subPath =
-          dir.substring(currentPath.isEmpty ? 0 : currentPath.length + 1);
+      final subPath = dir.substring(currentPath.isEmpty ? 0 : currentPath.length + 1);
       final firstSegment = subPath.split('/').first;
 
       if (firstSegment.isNotEmpty) {
@@ -178,16 +168,14 @@ class AssetGenerator {
         buffer.writeln('${indent}/// ${className} assets');
       }
 
-      buffer.writeln(
-          '${indent}static const $className $subfolder = $className._();');
+      buffer.writeln('${indent}static const $className $subfolder = $className._();');
     }
 
     // Generate the nested classes
     for (final subfolder in subfolders) {
       buffer.writeln();
       final className = _toClassName(subfolder);
-      final newPath =
-          currentPath.isEmpty ? subfolder : '$currentPath/$subfolder';
+      final newPath = currentPath.isEmpty ? subfolder : '$currentPath/$subfolder';
 
       buffer.writeln('${indent}class $className {');
       buffer.writeln('${indent}  const $className._();');
