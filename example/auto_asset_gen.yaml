@@ -1,0 +1,7 @@
+output_dir: lib/generated
+asset_class_name: Assets
+include_comments: true
+asset_dirs:
+  - assets/images
+  - assets/icons
+  - assets/fonts 

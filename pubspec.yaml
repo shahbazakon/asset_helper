@@ -1,0 +1,24 @@
+name: asset_helper
+description: A Flutter package that automatically generates reference files for assets in a Flutter project
+version: 0.1.0
+homepage: https://github.com/yourusername/asset_helper
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  yaml: ^3.1.2
+  path: ^1.8.3
+  args: ^2.4.2
+  analyzer: ^5.13.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.3
+
+flutter:
+  # No assets needed for the package itself 
