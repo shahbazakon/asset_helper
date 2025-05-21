@@ -6,7 +6,7 @@ A Flutter package that automatically generates reference files for assets in you
 
 ```yaml
 dev_dependencies:
-  asset_helper: ^1.0.1
+  asset_helper: ^1.0.2
 ```
 
 ## Commands
