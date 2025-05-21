@@ -119,19 +119,22 @@ class AssetGenerator {
       // Get the parent folder name if it exists
       if (pathParts.length >= 2) {
         currentFolder = pathParts[pathParts.length - 2];
-        // Capitalize first letter of folder
+        // Properly capitalize first letter of folder for camelCase
         if (currentFolder.isNotEmpty) {
-          currentFolder = currentFolder[0].toUpperCase() + currentFolder.substring(1);
+          currentFolder = _toCamelCase(currentFolder);
         }
       }
 
       // Get filename without extension
       final fileName = path.basenameWithoutExtension(asset.relativePath);
+      // Convert filename to proper camelCase (handling underscores and hyphens)
+      final capitalizedFileName = _toCamelCase(fileName);
+
       // Get uppercase extension without the dot
       final ext = asset.extension.toUpperCase().replaceAll('.', '');
 
       // Create variable name with folder + file + extension
-      final varName = _sanitizeVariableName('$currentFolder$fileName$ext');
+      final varName = _sanitizeVariableName('$currentFolder$capitalizedFileName$ext');
 
       buffer.writeln('${indent}final String $varName = \'${asset.relativePath}\';');
     }
@@ -148,8 +151,11 @@ class AssetGenerator {
     // Add assets as static constants
     for (final asset in assets) {
       // Use just the filename for the variable name, not the full path
-      final varName = _sanitizeVariableName(path.basenameWithoutExtension(asset.relativePath) +
-          asset.extension.toUpperCase().replaceAll('.', ''));
+      final fileName = path.basenameWithoutExtension(asset.relativePath);
+      final capitalizedFileName = _toCamelCase(fileName);
+
+      final varName = _sanitizeVariableName(
+          capitalizedFileName + asset.extension.toUpperCase().replaceAll('.', ''));
 
       buffer.writeln('${indent}static const String $varName = \'${asset.relativePath}\';');
     }
@@ -222,5 +228,27 @@ class AssetGenerator {
     }
 
     return varName;
+  }
+
+  /// Convert string to proper camelCase
+  String _toCamelCase(String text) {
+    if (text.isEmpty) {
+      return text;
+    }
+
+    // First replace any hyphens with underscores for consistent handling
+    text = text.replaceAll('-', '_');
+
+    // Split by underscore and capitalize each segment
+    final segments = text.split('_');
+    final result = StringBuffer();
+
+    // Add each segment with first letter capitalized
+    for (var segment in segments) {
+      if (segment.isEmpty) continue;
+      result.write(segment[0].toUpperCase() + segment.substring(1));
+    }
+
+    return result.toString();
   }
 }

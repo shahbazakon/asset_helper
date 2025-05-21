@@ -1,7 +1,8 @@
 # Changelog
 
-## 1.0.4
+## 1.0.5
 *  auto generation improved
+* naming convention improved
 
 ## 1.0.1
 *  path updated
