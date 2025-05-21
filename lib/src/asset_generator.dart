@@ -31,9 +31,6 @@ class AssetGenerator {
   List<AssetFile> _scanAssets() {
     final allAssets = <AssetFile>[];
 
-    // First, check assets declared in pubspec.yaml
-    // final declaredAssets = FileUtils.getAssetsFromPubspec(projectRoot);
-
     // Scan each asset directory
     for (final assetDir in config.assetDirs) {
       final dirPath = path.join(projectRoot, assetDir);
@@ -115,7 +112,27 @@ class AssetGenerator {
     assetFiles.sort((a, b) => a.relativePath.compareTo(b.relativePath));
 
     for (final asset in assetFiles) {
-      final varName = _sanitizeVariableName(asset.newVariableName);
+      // Get just the current folder name and the file name for the variable
+      final pathParts = path.split(asset.relativePath);
+      String currentFolder = '';
+
+      // Get the parent folder name if it exists
+      if (pathParts.length >= 2) {
+        currentFolder = pathParts[pathParts.length - 2];
+        // Capitalize first letter of folder
+        if (currentFolder.isNotEmpty) {
+          currentFolder = currentFolder[0].toUpperCase() + currentFolder.substring(1);
+        }
+      }
+
+      // Get filename without extension
+      final fileName = path.basenameWithoutExtension(asset.relativePath);
+      // Get uppercase extension without the dot
+      final ext = asset.extension.toUpperCase().replaceAll('.', '');
+
+      // Create variable name with folder + file + extension
+      final varName = _sanitizeVariableName('$currentFolder$fileName$ext');
+
       buffer.writeln('${indent}final String $varName = \'${asset.relativePath}\';');
     }
   }
@@ -130,13 +147,9 @@ class AssetGenerator {
 
     // Add assets as static constants
     for (final asset in assets) {
-      if (config.includeComments) {
-        buffer.writeln('${indent}/// Asset file: ${asset.relativePath}');
-      }
-
-      final varName = config.useNewNamingConvention
-          ? _sanitizeVariableName(asset.newVariableName)
-          : _sanitizeVariableName(asset.variableName);
+      // Use just the filename for the variable name, not the full path
+      final varName = _sanitizeVariableName(path.basenameWithoutExtension(asset.relativePath) +
+          asset.extension.toUpperCase().replaceAll('.', ''));
 
       buffer.writeln('${indent}static const String $varName = \'${asset.relativePath}\';');
     }
@@ -161,8 +174,6 @@ class AssetGenerator {
     // Generate child classes for each subfolder
     for (final subfolder in subfolders) {
       final className = _toClassName(subfolder);
-      // final newPath =
-      //     currentPath.isEmpty ? subfolder : '$currentPath/$subfolder';
 
       if (config.includeComments) {
         buffer.writeln('${indent}/// ${className} assets');

@@ -3,7 +3,7 @@ description: Example project for asset_helper
 
 publish_to: 'none'
 
-version: 1.0.3+3
+version: 1.0.4+3
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
