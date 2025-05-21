@@ -30,7 +30,7 @@ class AssetGenerator {
     final allAssets = <AssetFile>[];
 
     // First, check assets declared in pubspec.yaml
-    final declaredAssets = FileUtils.getAssetsFromPubspec(projectRoot);
+    // final declaredAssets = FileUtils.getAssetsFromPubspec(projectRoot);
 
     // Scan each asset directory
     for (final assetDir in config.assetDirs) {
@@ -171,8 +171,8 @@ class AssetGenerator {
     // Generate child classes for each subfolder
     for (final subfolder in subfolders) {
       final className = _toClassName(subfolder);
-      final newPath =
-          currentPath.isEmpty ? subfolder : '$currentPath/$subfolder';
+      // final newPath =
+      //     currentPath.isEmpty ? subfolder : '$currentPath/$subfolder';
 
       if (config.includeComments) {
         buffer.writeln('${indent}/// ${className} assets');

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.0
+*  Repath updated
+
+
 ## 0.1.0
 
 * Initial release with the following features:

@@ -114,7 +114,6 @@ class _AssetReferenceVisitor extends SimpleAstVisitor<void> {
 
   _AssetReferenceVisitor(this.referencedAssets);
 
-  @override
   void visitStringLiteral(StringLiteral node) {
     final value = node.stringValue;
     if (value != null) {

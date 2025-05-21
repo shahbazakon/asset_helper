@@ -103,27 +103,22 @@ List<AssetFile> _scanAssets(
 }
 
 /// Format asset type for display
+/// Returns a human-readable label for the given [AssetType].
+/// Returns a human-readable label for the given [AssetType].
 String _formatAssetType(AssetType type) {
-  switch (type) {
-    case AssetType.image:
-      return 'Images';
-    case AssetType.svg:
-      return 'SVG Files';
-    case AssetType.font:
-      return 'Fonts';
-    case AssetType.json:
-      return 'JSON Files';
-    case AssetType.yaml:
-      return 'YAML Files';
-    case AssetType.text:
-      return 'Text Files';
-    case AssetType.video:
-      return 'Videos';
-    case AssetType.audio:
-      return 'Audio Files';
-    case AssetType.other:
-      return 'Other Files';
-    default:
-      return 'Unknown';
-  }
+  const labels = {
+    AssetType.image: 'Images',
+    AssetType.svg: 'SVG Files',
+    AssetType.font: 'Fonts',
+    AssetType.json: 'JSON Files',
+    AssetType.yaml: 'YAML Files',
+    AssetType.text: 'Text Files',
+    AssetType.video: 'Videos',
+    AssetType.audio: 'Audio Files',
+    AssetType.other: 'Other Files',
+  };
+
+  return labels[type] ?? 'Unknown';
 }
+
+

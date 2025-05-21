@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:args/args.dart';
-import 'package:path/path.dart' as path;
 import 'package:asset_helper/asset_helper.dart';
 
 Future<void> main(List<String> args) async {
