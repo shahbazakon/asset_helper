@@ -1,7 +1,10 @@
 # Changelog
 
+## 1.0.6
+* Dependency improvement 
+
 ## 1.0.5
-*  auto generation improved
+* auto generation improved
 * naming convention improved
 
 ## 1.0.1

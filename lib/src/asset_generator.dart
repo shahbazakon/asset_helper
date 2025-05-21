@@ -119,9 +119,11 @@ class AssetGenerator {
       // Get the parent folder name if it exists
       if (pathParts.length >= 2) {
         currentFolder = pathParts[pathParts.length - 2];
-        // Properly capitalize first letter of folder for camelCase
+        // Convert folder name to camelCase but ensure first letter is lowercase
         if (currentFolder.isNotEmpty) {
           currentFolder = _toCamelCase(currentFolder);
+          // Make first letter lowercase
+          currentFolder = currentFolder[0].toLowerCase() + currentFolder.substring(1);
         }
       }
 
@@ -152,10 +154,17 @@ class AssetGenerator {
     for (final asset in assets) {
       // Use just the filename for the variable name, not the full path
       final fileName = path.basenameWithoutExtension(asset.relativePath);
-      final capitalizedFileName = _toCamelCase(fileName);
+
+      // Convert filename to camelCase
+      final formattedFileName = _toCamelCase(fileName);
+
+      // Start with lowercase for camelCase convention
+      final camelCaseFileName = formattedFileName.isNotEmpty
+          ? formattedFileName[0].toLowerCase() + formattedFileName.substring(1)
+          : formattedFileName;
 
       final varName = _sanitizeVariableName(
-          capitalizedFileName + asset.extension.toUpperCase().replaceAll('.', ''));
+          camelCaseFileName + asset.extension.toUpperCase().replaceAll('.', ''));
 
       buffer.writeln('${indent}static const String $varName = \'${asset.relativePath}\';');
     }
