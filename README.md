@@ -1,63 +1,39 @@
 # Asset Helper
 
-A Flutter package that automatically generates reference files for assets in a Flutter project.
-
-## Features
-
-- 📁 **Automatic Asset Analysis**: Scans the assets/ directory recursively to find all assets
-- 🔄 **Automatic Reference File Generation**: Generates a Dart file with static references
-- 🤖 **Machine Learning Integration**: Auto-categorizes assets and suggests improvements (coming soon)
-- 📝 **pubspec.yaml Parsing**: Reads and ensures compatibility with Flutter's asset configuration
-- 🛠️ **CLI Tool Support**: Commands to generate, clean, and analyze assets
+A Flutter package that automatically generates reference files for assets in your Flutter project.
 
 ## Installation
 
-Add this to your `pubspec.yaml`:
-
 ```yaml
 dev_dependencies:
-  asset_helper: ^0.1.0
+  asset_helper: ^1.0.0
 ```
+
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| `flutter pub run asset_helper:generate` | Generate asset reference file |
+| `flutter pub run asset_helper:clean` | Identify unused assets |
+| `flutter pub run asset_helper:analyze` | Analyze and summarize all assets |
 
 ## Usage
 
-### Basic Usage
-
-```dart
-// Run this command in your Flutter project
-flutter pub run asset_helper:generate
-```
-
-This will generate an `assets.dart` file that you can import in your project:
+After running the generate command, import and use the generated file:
 
 ```dart
 import 'package:your_app/generated/assets.dart';
 
-// Use generated asset references with the new naming convention:
-// For an asset at assets/icons/home.svg:
+// Access assets using the naming convention: FolderNameFileNameFileType
 Image.asset(Assets.IconsHomeSVG);
-
-// For an asset at assets/images/logo.png:
 Image.asset(Assets.ImagesLogoPNG);
 ```
 
-### CLI Commands
-
-- `flutter pub run asset_helper:generate` - Generates the reference file
-- `flutter pub run asset_helper:clean` - Cleans up unused assets
-- `flutter pub run asset_helper:analyze` - Provides a summary of all assets
-
 ## Configuration
 
-You can configure the package directly in your `pubspec.yaml`:
+Configure in your `pubspec.yaml`:
 
 ```yaml
-flutter:
-  assets:
-    - assets/images/
-    - assets/icons/
-    - assets/fonts/
-
 # Asset Helper configuration
 asset_helper:
   output_dir: lib/generated
@@ -66,31 +42,28 @@ asset_helper:
   use_new_naming_convention: true
 ```
 
-Alternatively, create an `asset_helper.yaml` file in your project root to customize:
+Or create an `asset_helper.yaml` file in your project root.
 
-```yaml
-output_dir: lib/generated
-asset_class_name: AppAssets
-include_comments: true
-use_new_naming_convention: true
-```
-
-### Configuration Options
+## Configuration Options
 
 | Option | Description | Default |
 |--------|-------------|---------|
-| `output_dir` | Directory where the generated file will be placed | `lib/generated` |
-| `asset_class_name` | Name of the generated asset class | `Assets` |
-| `include_comments` | Whether to include comments in the generated file | `true` |
-| `use_new_naming_convention` | Use the new naming convention (FolderNameFileNameFileType) | `true` |
-| `asset_dirs` | List of directories to scan for assets | `['assets']` (or from `pubspec.yaml`) |
-| `include_extensions` | List of file extensions to include (empty = include all) | `[]` |
-| `exclude_extensions` | List of file extensions to exclude | `[]` |
+| `output_dir` | Output directory for generated file | `lib/generated` |
+| `asset_class_name` | Name of generated class | `Assets` |
+| `include_comments` | Include comments in generated file | `true` |
+| `use_new_naming_convention` | Use FolderNameFileNameFileType pattern | `true` |
+| `asset_dirs` | Asset directories to scan | `['assets']` or from pubspec |
+| `include_extensions` | File extensions to include | `[]` (include all) |
+| `exclude_extensions` | File extensions to exclude | `[]` |
 
-## Contributing
+## Features
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+- ✓ Automatic asset scanning and reference generation
+- ✓ Customizable naming conventions
+- ✓ Configuration via pubspec.yaml or dedicated config file
+- ✓ Asset analysis and unused asset detection
+- ✓ Support for nested asset directories
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 
+MIT License - see the [LICENSE](LICENSE) file for details. 
