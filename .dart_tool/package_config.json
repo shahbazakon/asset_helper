@@ -3,15 +3,15 @@
   "packages": [
     {
       "name": "_fe_analyzer_shared",
-      "rootUri": "file:///Users/shahbazqureshi/.pub-cache/hosted/pub.dev/_fe_analyzer_shared-82.0.0",
+      "rootUri": "file:///Users/shahbazqureshi/.pub-cache/hosted/pub.dev/_fe_analyzer_shared-61.0.0",
       "packageUri": "lib/",
-      "languageVersion": "3.5"
+      "languageVersion": "2.17"
     },
     {
       "name": "analyzer",
-      "rootUri": "file:///Users/shahbazqureshi/.pub-cache/hosted/pub.dev/analyzer-7.4.5",
+      "rootUri": "file:///Users/shahbazqureshi/.pub-cache/hosted/pub.dev/analyzer-5.13.0",
       "packageUri": "lib/",
-      "languageVersion": "3.5"
+      "languageVersion": "2.19"
     },
     {
       "name": "args",
@@ -81,9 +81,9 @@
     },
     {
       "name": "flutter_lints",
-      "rootUri": "file:///Users/shahbazqureshi/.pub-cache/hosted/pub.dev/flutter_lints-5.0.0",
+      "rootUri": "file:///Users/shahbazqureshi/.pub-cache/hosted/pub.dev/flutter_lints-2.0.3",
       "packageUri": "lib/",
-      "languageVersion": "3.5"
+      "languageVersion": "2.19"
     },
     {
       "name": "flutter_test",
@@ -117,9 +117,9 @@
     },
     {
       "name": "lints",
-      "rootUri": "file:///Users/shahbazqureshi/.pub-cache/hosted/pub.dev/lints-5.1.1",
+      "rootUri": "file:///Users/shahbazqureshi/.pub-cache/hosted/pub.dev/lints-2.1.1",
       "packageUri": "lib/",
-      "languageVersion": "3.6"
+      "languageVersion": "3.0"
     },
     {
       "name": "matcher",
@@ -236,7 +236,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2025-05-21T18:17:38.668360Z",
+  "generated": "2025-05-21T18:37:31.635629Z",
   "generator": "pub",
   "generatorVersion": "3.7.0",
   "flutterRoot": "file:///Users/shahbazqureshi/Documents/Shahbaz/Flutter/flutterSDK/flutter",
